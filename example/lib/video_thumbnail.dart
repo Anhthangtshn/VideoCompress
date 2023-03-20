@@ -10,7 +10,7 @@ class VideoThumbnail extends StatefulWidget {
 }
 
 class _VideoThumbnailState extends State<VideoThumbnail> {
-  File? _thumbnailFile;
+  File _thumbnailFile;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,8 @@ class _VideoThumbnailState extends State<VideoThumbnail> {
         file = await openFile(acceptedTypeGroups: [typeGroup]);
       } else {
         final picker = ImagePicker();
-        var pickedFile = await picker.pickVideo(source: ImageSource.gallery);
-        file = File(pickedFile!.path);
+        var pickedFile = await picker.getVideo(source: ImageSource.gallery);
+        file = File(pickedFile.path);
       }
 
       if (file != null) {
@@ -59,7 +59,7 @@ class _VideoThumbnailState extends State<VideoThumbnail> {
     if (_thumbnailFile != null) {
       return Container(
         padding: EdgeInsets.all(20.0),
-        child: Image(image: FileImage(_thumbnailFile!)),
+        child: Image(image: FileImage(_thumbnailFile)),
       );
     }
     return Container();

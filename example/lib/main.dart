@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title}) : super(key: key);
 
-  final String? title;
+  final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -41,8 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
       file = await openFile(acceptedTypeGroups: [typeGroup]);
     } else {
       final picker = ImagePicker();
-      var pickedFile = await picker.pickVideo(source: ImageSource.gallery);
-      file = File(pickedFile!.path);
+      var pickedFile = await picker?.getVideo(source: ImageSource.gallery);
+      file = File(pickedFile.path);
     }
     if (file == null) {
       return;
@@ -54,9 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
       deleteOrigin: false,
       includeAudio: true,
     );
-    print(info!.path);
+    print(info.path);
     setState(() {
-      _counter = info.path!;
+      _counter = info.path;
     });
   }
 
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title!),
+        title: Text(widget.title),
       ),
       body: Center(
         child: Column(
